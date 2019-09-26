@@ -13,7 +13,7 @@ class GridView extends Component {
 
   render(){
     const items = this.state.items.map((item, key) =>
-      <Col>
+      <Col xs={6} sm={3} lg={2} style={{paddingTop:5, paddingBottom:5}}>
         <GridCardView item={item}></GridCardView>
       </Col>
     );
@@ -22,7 +22,7 @@ class GridView extends Component {
 
   
     return (
-        <Grid>
+        <Grid fluid="true">
           <Row>
             {items}
           </Row>
