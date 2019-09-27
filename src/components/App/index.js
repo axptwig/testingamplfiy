@@ -7,8 +7,8 @@ import Navbar from './../Navbar'
 function App() {
   return (
     <div className="App">
-      <Navbar></Navbar>
       <header className="App-header">
+        <Navbar></Navbar>
         <GridView></GridView>
       </header>
     </div>

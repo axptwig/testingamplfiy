@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Grid, Col, Row} from 'react-styled-flexboxgrid'
+import {Grid, Col, Row} from 'react-styled-flexboxgrid';
+import {Modal, ModalBody, ModalHeader} from 'reactstrap';
 import './index.css';
 import GridCardView from './../GridCardView'
 
@@ -20,19 +21,22 @@ class GridView extends Component {
     })
   }
 
+  hideMovie = () => {
+    console.log("hide");
+    this.setState({
+      displayingMovie:false
+    });
+  }
+
   overlayMovie = () => {
-    if(this.state.displayingMovie){
-      return (
-        <div>
-          {this.state.choosenItem.title}
-        </div>
-      )
-    } else {
-      return (
-        <div></div>
-      )
-    }
-    
+    return (
+    <Modal isOpen={this.state.displayingMovie} toggle={this.hideMovie}>
+      <ModalHeader toggle={this.hideMovie}>{this.state.choosenItem.title}</ModalHeader>
+      <ModalBody>
+        {this.state.choosenItem.details}
+      </ModalBody>
+    </Modal>
+    );
   }
 
 
@@ -49,7 +53,7 @@ class GridView extends Component {
 
   
     return (
-      <div>
+      <div style={{paddingTop:65}}>
         {this.overlayMovie()}
         <Grid fluid={true}>
           <Row>
