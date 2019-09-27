@@ -19,18 +19,18 @@ export default class Example extends React.Component {
   render() {
     return (
         <Navbar color="faded" light={true} fixed="top" style={{backgroundColor:"#1F1B24"}}>
-          <NavbarBrand href="/" className="mr-auto">Unicornflix</NavbarBrand>
+          <NavbarBrand href="/" className="mr-auto"style={{color: "white"}}>Unicornflix</NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
-              <NavItem>
-                <NavLink href="/components/">Login</NavLink>
+              <NavItem >
+                <NavLink href="/Login/" style={{color: "white"}}>Login</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/components/">Sign Up</NavLink>
+                <NavLink href="/Sign-up/" style={{color: "white"}}>Sign Up</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                <NavLink href="https://github.com/wizage/UnicornFlix" style={{color: "white"}}>GitHub</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
