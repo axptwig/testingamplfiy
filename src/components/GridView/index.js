@@ -45,7 +45,6 @@ class GridView extends Component {
     const items = this.state.items.map((item, key) =>
       <Col xs={6} sm={3} lg={2} style={{paddingTop:5, paddingBottom:5}}>
         <button onClick={(e) => this.displayMovie(item, e)}><GridCardView item={item}></GridCardView></button>
-        
       </Col>
     );
     
