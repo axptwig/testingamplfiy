@@ -8,11 +8,10 @@ class GridCardView extends Component {
     super(props);
   }
 
-
   render(){
     return (
-      <div class="card">
-          <div class="container">
+      <div className="card">
+          <div className="container">
             <img src={logo}></img>
             {this.props.item.title}
             <p>{this.props.item.details}</p>
