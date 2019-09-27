@@ -1,68 +1,22 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Unicorn Flix - Walkthrough (v1 alpha)
 
-## Available Scripts
+Welcome to Unicorn Flix. Today you are going to be making a cat sharing platform to share all of your favorite cat videos with the world. We know how important cat videos are with cheering up everyone so this platform will be raise the world's moral by 1749% (Study to be done). You have been contracted to be the head developer of this platform and was told that you have to release this platform in one week. So in this workshop we will be building out the platform you need to start viewing your cat videos.
 
-In the project directory, you can run:
+This workshop is split up into 3 parts:
 
-### `npm start`
+**Setting up backend infrastructure** - You will be using the Amplify CLI to stand up the backend infrastructure combining the API, Auth and Video.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Building the basic client** - You will be building out the basic client to communicate with the API to add and list the current videos
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+**Adding Auth** - You will be building out the Auth section to view the videos
 
-### `npm test`
+## Setting up Development Enviroment
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You just started at Unicorn Flix and they hooked you up with a brand new laptop - _sweeeet!_ Now let's configure your development environment. 
 
-### `npm run build`
+1. Clone the Unicorn Flix workshop by running `git clone https://github.com/wizage/UnicornFlix.git` or by downloading the zip [here](https://github.com/wizage/UnicornFlix/archive/master.zip)
+1. Download and install Node and Node Package Manager (NPM) if you don't already have it from [nodejs.org](https://nodejs.org/en/download/). Select **LTS** for the node version.
+1. Install AWS Amplify CLI using this command `npm install -g @aws-amplify/cli`
+1. Install a custom AWS Amplify CLI livestream plugin by running `npm install amplify-category-video -g`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Setting up backend infrastructure**
