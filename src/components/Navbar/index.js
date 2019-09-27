@@ -18,7 +18,7 @@ export default class Example extends React.Component {
   }
   render() {
     return (
-        <Navbar color="faded" light={true} fixed="top" style={{backgroundColor:"#ffffff"}}>
+        <Navbar color="faded" light={true} fixed="top" style={{backgroundColor:"#1F1B24"}}>
           <NavbarBrand href="/" className="mr-auto">Unicornflix</NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>

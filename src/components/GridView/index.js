@@ -53,7 +53,7 @@ class GridView extends Component {
 
   
     return (
-      <div style={{paddingTop:65}}>
+      <div style={{paddingTop:85}}>
         {this.overlayMovie()}
         <Grid fluid={true}>
           <Row>
