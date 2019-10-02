@@ -28,6 +28,11 @@ class GridView extends Component {
     console.log("clicked");
     this.setState({
       url:"https://content.jwplatform.com/manifests/yp34SRmf.m3u8"
+    }, () => {
+      if (!!this.player) {
+        this.player.src(this.state.url)
+        console.log("hello")
+      }
     });
 
     console.log(this.state.url);
@@ -40,11 +45,16 @@ class GridView extends Component {
     });
   }
 
+  onPlayerReady(player){
+    console.log("Player is ready: ", player);
+    this.player = player;
+  }
+
   overlayMovie = () => {
     return (
-    <Modal id='popup' isOpen={this.state.displayingMovie} toggle={this.hideMovie}>
+    <Modal id='popup' style={{maxWidth: 800}} isOpen={this.state.displayingMovie} toggle={this.hideMovie}>
       <ModalHeader  toggle={this.hideMovie}>{this.state.choosenItem.title}</ModalHeader>
-      <ModalBody style={{display: "inline-block"}}>
+      <ModalBody>
         {this.state.choosenItem.details}
             <div>
                 <VideoPlayer
@@ -52,10 +62,11 @@ class GridView extends Component {
                     src={this.state.url}
                     width="720"
                     height="420"
+                    onReady={this.onPlayerReady.bind(this)}
                 />
             </div>
             <div>
-              Input Url Here: <input type="text" name="contentURL"></input>
+              Input Url Here: <input type="text" name="contentURL" onChange={this.handleChange}></input>
               <button onClick={e => this.handleSubmit(e)}>submit</button>
             </div>
       </ModalBody>
