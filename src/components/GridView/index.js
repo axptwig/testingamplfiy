@@ -10,12 +10,22 @@ class GridView extends Component {
     super(props);
     this.state = {
       displayingMovie:false,
-      url:"http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8",
+      url:"",
       choosenItem:{},
+      value:"",
       items:[{id:1, title:"blah", details:"None"}, {id:2, title:"Blha2", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}]
     }
-  }
 
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+  handleSubmit(event) {
+    this.playURL(this.state.value)
+    event.preventDefault();
+  }
 
   displayMovie = (item, e) =>{
     this.setState({
@@ -24,10 +34,10 @@ class GridView extends Component {
     })
   }
 
-  playURL = () => {
+  playURL = (link) => {
     console.log("clicked");
     this.setState({
-      url:"https://content.jwplatform.com/manifests/yp34SRmf.m3u8"
+      url:link
     }, () => {
       if (!!this.player) {
         this.player.src(this.state.url)
@@ -66,17 +76,14 @@ class GridView extends Component {
                 />
             </div>
             <div>
-              Input Url Here: <input type="text" name="contentURL" onChange={this.handleChange}></input>
+              Input Url Here: <input type="text" value={this.state.value} name="contentURL" onChange={this.handleChange}></input>
               <button onClick={e => this.handleSubmit(e)}>submit</button>
             </div>
       </ModalBody>
     </Modal>
     );
   }
-  handleSubmit(event) {
-    event.preventDefault()
-    this.playURL()
-  }
+
 
 
 
