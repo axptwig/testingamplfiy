@@ -13,7 +13,7 @@ class GridView extends Component {
       url:"",
       choosenItem:{},
       value:"",
-      items:[{id:1, title:"blah", details:"None"}, {id:2, title:"Blha2", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}]
+      items:[{id:1, title:"Steve Jobs Speech", details:"None", url:"http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8"}, {id:2, title:"JW Player Test", details:"None", url:"https://content.jwplatform.com/manifests/yp34SRmf.m3u8"}, {id:3, title:"Kaltura Player HLS URL Tester", details:"None", url:"http://cdnapi.kaltura.com/p/1878761/sp/187876100/playManifest/entryId/1_usagz19w/flavorIds/1_5spqkazq,1_nslowvhp,1_boih5aji,1_qahc37ag/format/applehttp/protocol/http/a.m3u8"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}]
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -69,7 +69,7 @@ class GridView extends Component {
             <div>
                 <VideoPlayer
                     controls={true}
-                    src={this.state.url}
+                    src={this.state.choosenItem.url}
                     width="720"
                     height="420"
                     onReady={this.onPlayerReady.bind(this)}
