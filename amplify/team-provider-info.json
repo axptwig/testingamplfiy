@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "unicornflix-dev-20191010110518-authRole",
+            "UnauthRoleArn": "arn:aws:iam::342464646979:role/unicornflix-dev-20191010110518-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::342464646979:role/unicornflix-dev-20191010110518-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "unicornflix-dev-20191010110518-deployment",
+            "UnauthRoleName": "unicornflix-dev-20191010110518-unauthRole",
+            "StackName": "unicornflix-dev-20191010110518",
+            "StackId": "arn:aws:cloudformation:us-west-2:342464646979:stack/unicornflix-dev-20191010110518/84961a20-eb88-11e9-a9a6-06cd1a4a924e"
+        },
+        "categories": {
+            "auth": {
+                "unicornflix70ea44a2": {}
+            }
+        }
+    }
+}
