@@ -5,7 +5,7 @@ type vodAsset @model @searchable {
   length:Int
 
   #DO NOT EDIT
-  url:videoObject!
+  url:videoObject
 } 
 
 #DO NOT EDIT
