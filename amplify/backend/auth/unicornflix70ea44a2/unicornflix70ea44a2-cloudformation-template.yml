@@ -85,7 +85,10 @@ Parameters:
                       
   dependsOn:
     Type: CommaDelimitedList
-    
+              
+  userPoolGroupList:
+    Type: CommaDelimitedList
+                
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
 

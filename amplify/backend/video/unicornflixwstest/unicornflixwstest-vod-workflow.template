@@ -5,6 +5,14 @@ Parameters:
     Type: String
     Description: The environment name. e.g. Dev, Test, or Production.
     Default: NONE
+  authRoleName:
+    Type: String
+    Description: Arn for authRoleArn
+    Default: NONE
+  unauthRoleName:
+    Type: String
+    Description: Arn for authRoleArn
+    Default: NONE
   pS3:
     Type: String
     Description: Store template and lambda package
@@ -23,7 +31,7 @@ Parameters:
   pTemplateArn:
     Type: String
     Description: Arn for MediaConvert Template
-    Default: arn:aws:mediaconvert:us-west-2:342464646979:jobTemplates/System-Ott_Hls_Ts_Avc_Aac
+    Default: arn:aws:mediaconvert:us-west-2:342464646979:jobTemplates/Amplify_Video_Ott_Hls_Ts_Avc_Aac
   pCloudfrontEnabled:
     Type: String
     Description: Boolean to enable/disable cloudfront
@@ -47,6 +55,7 @@ Resources:
     Properties:
       TemplateURL: !Sub "https://s3.amazonaws.com/${pS3}/${pSourceFolder}/S3InputBucket.template"
       Parameters:
+        authRoleName: !Ref authRoleName
         pBucketName:
           !If
             - HasEnvironmentParameter

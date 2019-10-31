@@ -1,9 +1,8 @@
 import React from 'react';
 import './index.css';
-import { API, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation, Storage } from 'aws-amplify';
 import { createVodAsset } from '../../graphql/mutations';
-
-
+import { withAuthenticator } from 'aws-amplify-react';
 
 class Admin extends React.Component {
     constructor(props) {
@@ -13,6 +12,12 @@ class Admin extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleLenChange = this.handleLenChange.bind(this);
 
+    }
+
+    componentDidMount(){
+      Storage.put('test2.txt', 'Hello')
+      .then (result => console.log(result))
+      .catch(err => console.log(err));
     }
 
     handleChange(event) {
@@ -65,5 +70,5 @@ class Admin extends React.Component {
     }
 }
 
-export default Admin;
+export default withAuthenticator(Admin, true);
 

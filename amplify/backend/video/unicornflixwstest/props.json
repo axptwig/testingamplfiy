@@ -4,10 +4,22 @@
         "bucket": "unicornflix-dev-20191010110518-deployment"
     },
     "template": {
-        "name": "System-Ott_Hls_Ts_Avc_Aac",
-        "arn": "arn:aws:mediaconvert:us-west-2:342464646979:jobTemplates/System-Ott_Hls_Ts_Avc_Aac"
+        "name": "Amplify_Video_Ott_Hls_Ts_Avc_Aac.json",
+        "arn": "arn:aws:mediaconvert:us-west-2:342464646979:jobTemplates/Amplify_Video_Ott_Hls_Ts_Avc_Aac"
     },
     "contentDeliveryNetwork": {
         "enableDistribution": false
+    },
+    "cms": {
+        "subscribeField": false,
+        "editAPI": true
+    },
+    "parameters": {
+        "authRoleName": {
+            "Ref": "AuthRoleName"
+        },
+        "unauthRoleName": {
+            "Ref": "UnauthRoleName"
+        }
     }
 }
