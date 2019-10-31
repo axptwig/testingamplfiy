@@ -30,6 +30,9 @@ export default class Example extends React.Component {
                 <NavLink href="/Sign-up/" style={{color: "white"}}>Sign Up</NavLink>
               </NavItem>
               <NavItem>
+                <NavLink href="/Admin/" style={{color: "white"}}>Admin</NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink href="https://github.com/wizage/UnicornFlix" style={{color: "white"}}>GitHub</NavLink>
               </NavItem>
             </Nav>

@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import VideoPlayer from 'react-video-js-player';
+import { API, graphqlOperation } from 'aws-amplify';
 import {Grid, Col, Row} from 'react-styled-flexboxgrid';
 import {Modal, ModalBody, ModalHeader} from 'reactstrap';
+import { onCreateVodAsset } from '../../graphql/subscriptions';
 import './index.css';
 import GridCardView from './../GridCardView'
+import * as queries from '../../graphql/queries';
+import BottomScrollListener from 'react-bottom-scroll-listener'
 
 class GridView extends Component {
   constructor(props){
@@ -13,11 +17,13 @@ class GridView extends Component {
       url:"",
       choosenItem:{},
       value:"",
-      items:[{id:1, title:"Steve Jobs Speech", details:"None", url:"http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8"}, {id:2, title:"JW Player Test", details:"None", url:"https://content.jwplatform.com/manifests/yp34SRmf.m3u8"}, {id:3, title:"Kaltura Player HLS URL Tester", details:"None", url:"http://cdnapi.kaltura.com/p/1878761/sp/187876100/playManifest/entryId/1_usagz19w/flavorIds/1_5spqkazq,1_nslowvhp,1_boih5aji,1_qahc37ag/format/applehttp/protocol/http/a.m3u8"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}, {id:3, title:"works", details:"None"}]
+      nextToken:"",
+      items:[{id:1, title:"Steve Jobs Speech", details:"None", url:"http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8"}]
+    
     }
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleOnDocumentBottom = this.handleOnDocumentBottom.bind(this);
   }
   handleChange(event) {
     this.setState({value: event.target.value});
@@ -26,7 +32,31 @@ class GridView extends Component {
     this.playURL(this.state.value)
     event.preventDefault();
   }
+  async componentDidMount(){
+    const allTodos = await API.graphql(graphqlOperation(queries.listVodAssets));
+    var nextToken = allTodos.data.listVodAssets.nextToken;
+    if(nextToken == undefined){
+      nextToken = "";
+    }
+    this.setState({items: allTodos.data.listVodAssets.items, nextToken: nextToken})
+    this.listenForNewAssets();
+  }
 
+  async handleOnDocumentBottom(){
+    console.log('I am at bottom! ' + Math.round(performance.now()))
+    console.log(this.state.nextToken);
+    if(this.state.nextToken !== "" && this.state.nextToken !== undefined){
+      const allTodos = await API.graphql(graphqlOperation(queries.listVodAssets,{nextToken:this.state.nextToken}));
+      var items = this.state.items.concat(allTodos.data.listVodAssets.items);
+      console.log(this.state.token);
+      var nextToken = allTodos.data.listVodAssets.nextToken;
+      if(nextToken == undefined){
+        nextToken = "";
+      }
+      this.setState({items: items, nextToken: nextToken});
+
+    }
+  }
   displayMovie = (item, e) =>{
     this.setState({
       displayingMovie:true,
@@ -84,7 +114,21 @@ class GridView extends Component {
     );
   }
 
-
+  listenForNewAssets = () => {
+    API.graphql(
+      graphqlOperation(onCreateVodAsset)
+    ).subscribe({
+      next: (((data) => {
+        console.log(data.value.data.onCreateVodAsset);
+        console.log("RIP");
+        var newItemList = this.state.items.push(data.value.data.onCreateVodAsset);
+        console.log(newItemList);
+        this.setState({
+            //items:newItemList
+        });
+      }).bind(this))
+    })
+  }
 
 
   render(){
@@ -100,6 +144,7 @@ class GridView extends Component {
     return (
       <div style={{paddingTop:85}}>
         {this.overlayMovie()}
+        <BottomScrollListener onBottom={this.handleOnDocumentBottom} />
         <Grid fluid={true}>
           <Row>
             {items}
