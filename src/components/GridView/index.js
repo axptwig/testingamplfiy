@@ -18,7 +18,7 @@ class GridView extends Component {
       choosenItem:{},
       value:"",
       nextToken:"",
-      items:[{id:1, title:"Steve Jobs Speech", details:"None", url:"http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8"}]
+      items:[]
     
     }
     this.handleChange = this.handleChange.bind(this);
