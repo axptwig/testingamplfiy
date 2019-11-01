@@ -11,10 +11,15 @@ class Admin extends React.Component {
         this.submitFormHandler = this.submitFormHandler.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleLenChange = this.handleLenChange.bind(this);
-
     }
 
     componentDidMount(){
+      Storage.configure({
+        AWSS3: {
+            bucket: 'unicornflixwstest-dev-input',
+            region: 'us-west-2'
+        }
+      });
       Storage.put('test2.txt', 'Hello')
       .then (result => console.log(result))
       .catch(err => console.log(err));
@@ -60,7 +65,6 @@ class Admin extends React.Component {
 	          	Title: <input type="text" value={this.state.titleVal} name="titleVal" onChange={this.handleChange}/><br/>
 	          	Length: <input type="text" value={this.state.lenVal} name="lenVal" onChange={this.handleChange}/><br/>
 	          	Description: <br/><textarea rows="4" cols="50" value={this.state.descVal} name="descVal" onChange={this.handleChange}></textarea><br/>
-
 	            <input type="file" accept='image/png'/>
 	            <input type="submit" value="Submit" />
 	          </div>
