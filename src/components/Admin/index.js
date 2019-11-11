@@ -3,6 +3,7 @@ import './index.css';
 import { API, graphqlOperation, Storage } from 'aws-amplify';
 import { createVodAsset } from '../../graphql/mutations';
 import { withAuthenticator } from 'aws-amplify-react';
+import FilePicker from './../FilePicker'
 
 class Admin extends React.Component {
     constructor(props) {
@@ -65,7 +66,7 @@ class Admin extends React.Component {
 	          	Title: <input type="text" value={this.state.titleVal} name="titleVal" onChange={this.handleChange}/><br/>
 	          	Length: <input type="text" value={this.state.lenVal} name="lenVal" onChange={this.handleChange}/><br/>
 	          	Description: <br/><textarea rows="4" cols="50" value={this.state.descVal} name="descVal" onChange={this.handleChange}></textarea><br/>
-	            <input type="file" accept='image/png'/>
+	            <FilePicker />
 	            <input type="submit" value="Submit" />
 	          </div>
 	        </form>
