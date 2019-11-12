@@ -75,4 +75,3 @@ class Admin extends React.Component {
 }
 
 export default withAuthenticator(Admin, true);
-
