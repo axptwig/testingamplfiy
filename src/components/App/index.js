@@ -5,6 +5,7 @@ import GridView from './../GridView';
 import Navbar from './../Navbar'
 import Amplify from 'aws-amplify';
 import awsconfig from './../../aws-exports';
+import { withAuthenticator } from 'aws-amplify-react';
 
 Amplify.configure(awsconfig);
 
@@ -19,4 +20,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App, true);

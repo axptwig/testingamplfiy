@@ -17,33 +17,14 @@ class FilePicker extends Component {
 
   }
 
- 
-
   onChange(e) {
       const file = e.target.files[0];
-      alert('Selected files: ' + file.name );
       this.state.name =file.name;
-      Storage.put(file.name, file, {
-          contentType: 'video/*'
-      })
-      .then (result => console.log(result))
-      .catch(err => console.log(err));
-      
-      e.preventDefault();
-
-      
+      this.props.callbackFromParent(file);
+      e.preventDefault();    
   }
 
- 
-
-
-
-
-
   render(){
-   
-   
-  
     return (
       <input type="file" id="FilePicker" accept='video/*' onChange={(e) => this.onChange(e)}/>
     );
