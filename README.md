@@ -1,23 +1,27 @@
-# Unicorn Flix - Walkthrough (v1 alpha)
+# UnicornFlix
 
-Welcome to Unicorn Flix. Today you are going to be making a cat sharing platform to share all of your favorite cat videos with the world. We know how important cat videos are with cheering up everyone so this platform will be raise the world's moral by 1749% (Study to be done). You have been contracted to be the head developer of this platform and was told that you have to release this platform in one week. So in this workshop we will be building out the platform you need to start viewing your cat videos.
+Welcome to UnicornFlix. As the first developer here at UnicornFlix it's your mission to bring humanity closer to the Unicorn kingdom by serving up premium Unicorn videos to subscribers. You've been asked by the founders to develop a minimum-viable-product to begin serving videos to users as soon as possible. They've also asked you to keep operational overhead at a minimum and to keep the API design flexible as the business model could pivot at any moment.
 
-This workshop is split up into 3 parts:
+In this workshop we will build the video on demand streaming platform that allows you to upload, process, and serve videos to authenticated users.
 
-**Backend Deployment with Amplify CLI** - You will be using the Amplify CLI to stand up the backend infrastructure combining the API, Auth and Video.
+The workshop is split into three primary sections with a collection of optional extensions:
 
-**Basic Web Client with Amplify React Libraries** - You will be building out the basic client to communicate with the API to add and list the current videos
+**Backend Deployment with Amplify CLI** - Use the Amplify CLI to stand up the backend infrastructure combining the API, Auth and Video.
 
-**Adding Authentication with the Amplify Auth Component** - You will be building out the Auth section to view the videos
+**Web Client Admin View** - Build a web application to add videos and associate basic metadata.
 
-## Setting up Development Enviroment
+**Web Client User View** - Expose the videos to users who have signed up for the service.
 
-You just started at Unicorn Flix and they hooked you up with a brand new laptop - _sweeeet!_ Now let's configure your development environment. 
+**Optional Extensions** - An optional section with a collection of tutorials that extend the application functionality.
 
-1. Clone the Unicorn Flix workshop by running `git clone https://github.com/wizage/UnicornFlix.git` or by downloading the zip [here](https://github.com/wizage/UnicornFlix/archive/master.zip)
+## Setting up Development Environment
+
+You just started at UnicornFlix and they hooked you up with a brand new laptop - _sweeeet!_ Now let's configure your development environment. 
+
+1. Clone the UnicornFlix workshop by running `git clone https://github.com/wizage/UnicornFlix.git` or by downloading the zip [here](https://github.com/wizage/UnicornFlix/archive/master.zip)
 1. Download and install Node and Node Package Manager (NPM) if you don't already have it from [nodejs.org](https://nodejs.org/en/download/). Select **LTS** for the node version.
 1. Install AWS Amplify CLI using this command `npm install -g @aws-amplify/cli`
-1. Install a custom AWS Amplify CLI livestream plugin by running `npm install amplify-category-video -g`
+1. Install Amplify Video, a custom AWS Amplify CLI plugin, by running `npm install -g amplify-category-video`
 
 ## Backend Deployment with Amplify CLI
 
@@ -58,20 +62,20 @@ You just started at Unicorn Flix and they hooked you up with a brand new laptop 
      ![add](images/amplify_api.png) 
 1. Once the prompts complete, make sure the module was added by checking `amplify status`
     ![status](images/amplify_status.png)    
-1. Now it is time to create our resources! Now run `amplify push` to create the backend resources for the video component! It will take a few minutes to stage and create the resources in your AWS environment. While that runs, let's take a brief look at what was just created! (exposition about architecture)
+1. Now it is time to create our resources. Run `amplify push` to create the backend video resource which is comprised of the services necessary to manage, process, and serve our videos. It will take a few minutes to stage and create the resources in your AWS environment. While that runs, let's take a brief look at what was just created:
 
-    (architecture diagram)
+    ![architecture](images/amplify_arch.png)
 
-1. With our infrastructure successfully deployed, let's test processing and hosting an asset. Open the S3 console and upload a small video file to the oS3InputBucket output from the cloudformation template.
+1. With the infrastructure deployed, let's test processing and hosting an asset. Open the S3 console and upload a small video file to the oS3InputBucket output from the cloudformation template.
 1. Check the mediaconvert console, you should see an asset in 'progressing' shortly after the upload completes. Once this successfully completes, move on to the next step.
 1. In the oS3OutputBucket, you should seee a .m3u8 manifest object. Select all objects and select 'make public' (do not do this with a bucket or content that is private. this is only for our alpha lab)
 1. Finally, access the .m3u8 object url from the properties page of S3 and open it in safari, iOS, or by using a test player like the [JW Player Stream Tester](https://developer.jwplayer.com/tools/stream-tester/)
 
 Congratulations! You have now hosting a Video-on-Demand platform on AWS! Now let's setup a website that we will use to serve the content to authenticated users.
 
-## Basic Web Client with Amplify React Libraries
+## Web Client Admin View
 
-We've pre-created a simple javascrip/react web application that will serve as the basis for our workshop.
+We've pre-created a simple javascript/react web application that will serve as the basis for our workshop.
 
 1. To install the dependencies necessary to run the website locally run `npm install` from the UnicornFlix directory
 1. Next, to run the website with a local development environment run `npm start`
@@ -80,7 +84,7 @@ We've pre-created a simple javascrip/react web application that will serve as th
 
 1. THIS IS WHERE INFO ON SUBSCRIBING TO CMS WILL GO
 
-## Adding Authentication with the Amplify Auth Component
+## Web Client User View
 When you are done checking out the application lets first add some auth to our application.
 
 1. We will need to add two more npm packages to the client that are part of the amplify ecosystem:

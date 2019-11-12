@@ -3,6 +3,7 @@ import './index.css';
 import { API, graphqlOperation, Storage } from 'aws-amplify';
 import { createVodAsset } from '../../graphql/mutations';
 import { withAuthenticator } from 'aws-amplify-react';
+import FilePicker from './../FilePicker'
 
 class Admin extends React.Component {
     constructor(props) {
@@ -33,7 +34,15 @@ class Admin extends React.Component {
         [name]:value
       });
     }
-
+    myCallback = (dataFromChild) => {
+        var f = dataFromChild;
+        console.log("help me" + dataFromChild + "_" + dataFromChild.name);
+        this.setState({
+          file: dataFromChild,
+          fileName: dataFromChild.name
+        });
+        console.log("help me2" + this.state.file + "_" + this.state.fileName);
+    }
     handledescChange(event) {
         this.setState({descVal: event.target.value});
     }
@@ -41,6 +50,7 @@ class Admin extends React.Component {
         this.setState({lenVal: event.target.value});
     }
     submitFormHandler(event){
+      console.log(this.state.file);
         const object = {
             input: {
 
@@ -53,19 +63,25 @@ class Admin extends React.Component {
        API.graphql(graphqlOperation(createVodAsset, object)).then((response,error) => {
               console.log(response.data.createVodAsset);
         });
-        event.preventDefault();
+
+      Storage.put(this.state.fileName, this.state.file, {
+          contentType: 'video/*'
+        })
+        .then (result => console.log(result))
+        .catch(err => console.log(err));
+         event.preventDefault();
 
     }
     render() {
         return (      
-        <div>
+        <div class="App-header">
         	<h1>Admin Panel</h1>
 	        <form onSubmit={this.submitFormHandler}>
 	          <div>
 	          	Title: <input type="text" value={this.state.titleVal} name="titleVal" onChange={this.handleChange}/><br/>
 	          	Length: <input type="text" value={this.state.lenVal} name="lenVal" onChange={this.handleChange}/><br/>
 	          	Description: <br/><textarea rows="4" cols="50" value={this.state.descVal} name="descVal" onChange={this.handleChange}></textarea><br/>
-	            <input type="file" accept='image/png'/>
+	            <FilePicker callbackFromParent={this.myCallback}/>
 	            <input type="submit" value="Submit" />
 	          </div>
 	        </form>
