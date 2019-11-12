@@ -74,7 +74,7 @@ class Admin extends React.Component {
     }
     render() {
         return (      
-        <div>
+        <div class="App-header">
         	<h1>Admin Panel</h1>
 	        <form onSubmit={this.submitFormHandler}>
 	          <div>
