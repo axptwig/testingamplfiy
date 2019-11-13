@@ -19,7 +19,7 @@ class Admin extends React.Component {
         .then( data =>  {
           const groups = data.idToken.payload["cognito:groups"];
           if (groups){
-            this.setState({group:data.idToken.payload["cognito:groups"]});
+            this.setState({groups:data.idToken.payload["cognito:groups"]});
           }
         });
 
@@ -30,9 +30,6 @@ class Admin extends React.Component {
             region: 'us-west-2'
         }
       });
-      Storage.put('test2.txt', 'Hello')
-      .then (result => console.log(result))
-      .catch(err => console.log(err));
     }
 
     handleChange(event) {
@@ -45,12 +42,10 @@ class Admin extends React.Component {
     }
     myCallback = (dataFromChild) => {
         var f = dataFromChild;
-        console.log("help me" + dataFromChild + "_" + dataFromChild.name);
         this.setState({
           file: dataFromChild,
           fileName: dataFromChild.name
         });
-        console.log("help me2" + this.state.file + "_" + this.state.fileName);
     }
     handledescChange(event) {
         this.setState({descVal: event.target.value});
@@ -84,7 +79,7 @@ class Admin extends React.Component {
     }
 
     createAdminPanel(){
-
+     
       if (this.state.groups.includes("Admin")){
         return (
           <div>
