@@ -3,6 +3,7 @@ import './index.css';
 import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
 import { createVodAsset, createVideoObject } from '../../graphql/mutations';
 import { withAuthenticator } from 'aws-amplify-react';
+import awsvideoconfig from '../../aws-video-exports';
 import uuidv4 from 'uuid/v4';
 import FilePicker from './../FilePicker'
 
@@ -26,7 +27,7 @@ class Admin extends React.Component {
 
       Storage.configure({
         AWSS3: {
-            bucket: 'unicornflix-dev-iw6z2qfpy',
+            bucket: awsvideoconfig.awsOutputVideo,
             region: 'us-west-2'
         }
       });

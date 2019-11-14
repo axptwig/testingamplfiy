@@ -10,6 +10,7 @@ import GridCardView from './../GridCardView'
 import * as queries from '../../graphql/queries';
 import BottomScrollListener from 'react-bottom-scroll-listener'
 import 'video.js/dist/video-js.css'
+import awsvideo from '../../aws-video-exports'
 
 class GridView extends Component {
   constructor(props){
@@ -76,7 +77,7 @@ class GridView extends Component {
   displayMovie = (item, e) =>{
     this.setState({
       sources:[{
-        src:`https://unicornflix-dev-ow6z2qfpy.s3-us-west-2.amazonaws.com/output/${item.video.id}.m3u8`,
+        src:`https://${awsvideo.awsOutputVideo}.s3.amazonaws.com/output/${item.video.id}.m3u8`,
         type:'application/x-mpegURL'
       }],
       displayingMovie:true,
