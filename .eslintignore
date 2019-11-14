@@ -2,3 +2,4 @@ node_modules/
 amplify/
 aws-video-exports.js
 aws-exports.js
+serviceWorker.js

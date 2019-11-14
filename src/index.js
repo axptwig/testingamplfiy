@@ -1,23 +1,11 @@
-import React from 'react';
+/* eslint-env browser */
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
-import App from './components/App/index';
-import Admin from './components/Admin/index';
 import * as serviceWorker from './serviceWorker';
+import router from './router';
 
-const routing = (
-  <Router>
-    <div>
-      <Route exact path="/" component={App} />
-      <Route path="/Admin" component={Admin} />
-    </div>
-  </Router>
-);
-
-
-ReactDOM.render(routing, document.getElementById('root'));
+ReactDOM.render(router, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
