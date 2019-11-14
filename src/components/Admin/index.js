@@ -1,8 +1,9 @@
 import React from 'react';
 import './index.css';
 import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
-import { createVodAsset } from '../../graphql/mutations';
+import { createVodAsset, createVideoObject } from '../../graphql/mutations';
 import { withAuthenticator } from 'aws-amplify-react';
+import uuidv4 from 'uuid/v4';
 import FilePicker from './../FilePicker'
 
 class Admin extends React.Component {
@@ -51,28 +52,40 @@ class Admin extends React.Component {
         this.setState({descVal: event.target.value});
     }
 
+
     submitFormHandler(event){
       event.preventDefault();
-      const object = {
-          input: {
 
-              title: this.state.titleVal,
-              description:this.state.descVal,
-            
-          }
+      const uuid = uuidv4();
+
+      const videoObject = {
+        input: {
+          id: uuid,
+          objectID: uuid
+        }
       }
-      
-     API.graphql(graphqlOperation(createVodAsset, object)).then((response,error) => {
-            console.log(response.data.createVodAsset);
-      }).catch(err => {
+
+      API.graphql(graphqlOperation(createVideoObject, videoObject)).then((response, error) => {
+        const videoAsset = {
+          input: {
+            title: this.state.titleVal,
+            description:this.state.descVal,
+            vodAssetVideoId: uuid,
+          }
+        }
+        API.graphql(graphqlOperation(createVodAsset, videoAsset)).then((response, error) => {
+          console.log(response.data.createVodAsset);
+        }).catch(err => {
           //alert("error: with form"); 
           return
         });
+      });
+      
 
-    Storage.put(this.state.fileName, this.state.file, {
+    Storage.put(`${uuid}.mp4`, this.state.file, {
         contentType: 'video/*'
       })
-      .then (result => alert("Successfully Uploaded: " + this.state.fileName))
+      .then (result => alert("Successfully Uploaded: " + uuid))
       .catch(err => console.log("Error: " + err));
        
 

@@ -48,14 +48,6 @@ class GridView extends Component {
       }
     };
     const url = await Storage.get('SampleVideo_1280x720_1mb.m3u8', storageOptions);
-    this.setState({
-      sources:[
-        {
-          src:url,
-          type:'application/x-mpegURL'
-        }
-      ]
-    });
     const assets = await API.graphql(graphqlOperation(queries.listVodAssets));
     var nextToken = assets.data.listVodAssets.nextToken;
     if(nextToken == undefined){
@@ -83,24 +75,13 @@ class GridView extends Component {
   }
   displayMovie = (item, e) =>{
     this.setState({
+      sources:[{
+        src:`https://unicornflix-dev-ow6z2qfpy.s3-us-west-2.amazonaws.com/output/${item.video.id}.m3u8`,
+        type:'application/x-mpegURL'
+      }],
       displayingMovie:true,
       choosenItem:item
-    })
-  }
-
-  playURL = (link) => {
-    console.log("clicked");
-    this.setState({
-      sources:[ {
-        src:'https://unicornflixwstest-dev-output.s3-us-west-2.amazonaws.com/output/2018-11-28+16-49-02.m3u8',
-        type:'application/x-mpegURL'
-      }]
-    }, () => {
-      if (!!this.player) {
-      }
     });
-
-    console.log(this.state.url);
   }
 
   hideMovie = () => {
