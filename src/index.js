@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
-import App from './components/App';
-import Admin from './components/Admin';
+import App from './components/App/index';
+import Admin from './components/Admin/index';
 import * as serviceWorker from './serviceWorker';
 
 const routing = (
