@@ -42,7 +42,6 @@ class Admin extends React.Component {
       });
     }
     myCallback = (dataFromChild) => {
-        var f = dataFromChild;
         this.setState({
           file: dataFromChild,
           fileName: dataFromChild.name

@@ -7,6 +7,10 @@ export default class VideoPlayer extends React.Component {
 
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
       console.log('onPlayerReady', this);
+      this.tech_.hls.xhr.beforeRequest = (options) => {
+        console.log(options);
+        //options.uri = 
+      };
     });
     
   }

@@ -134,7 +134,7 @@ class GridView extends Component {
         this.setState({
             //items:newItemList
         });
-      }).bind(this))
+      }))
     })
   }
 

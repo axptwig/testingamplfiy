@@ -4,15 +4,11 @@ import logo from '../App/logo.svg';
 
 
 class GridCardView extends Component {
-  constructor(props){
-    super(props);
-  }
-
   render(){
     return (
       <div className="card">
           <div className="container">
-            <img src={logo}></img>
+            <img src={logo} alt='Movie'></img>
             {this.props.item.title}
             <p>{this.props.item.details}</p>
           </div>
