@@ -24,7 +24,6 @@ class Admin extends React.Component {
           }
         });
 
-
       Storage.configure({
         AWSS3: {
             bucket: 'unicornflix-dev-iw6z2qfpy',

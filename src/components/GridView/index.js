@@ -9,8 +9,6 @@ import VideoPlayer from './../VideoPlayer'
 import GridCardView from './../GridCardView'
 import * as queries from '../../graphql/queries';
 import BottomScrollListener from 'react-bottom-scroll-listener'
-import { AwesomeButton } from "react-awesome-button";
-import "react-awesome-button/dist/styles.css";
 import 'video.js/dist/video-js.css'
 
 class GridView extends Component {
@@ -107,7 +105,6 @@ class GridView extends Component {
     return (
     <Modal id='popup' style={{maxWidth: 800}} isOpen={this.state.displayingMovie} toggle={this.hideMovie}>
       <ModalHeader  toggle={this.hideMovie}>{this.state.choosenItem.title}</ModalHeader>
-      <AwesomeButton type="primary">Button</AwesomeButton>
       <ModalBody>
         {this.state.choosenItem.description}
         {this.state.choosenItem.details}
