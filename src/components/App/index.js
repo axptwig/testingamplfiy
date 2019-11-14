@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import GridView from './../GridView';
 import Amplify from 'aws-amplify';
-import awsconfig from './../../aws-exports';
 import { withAuthenticator } from 'aws-amplify-react';
+import GridView from '../GridView';
+import awsconfig from '../../aws-exports';
 
 Amplify.configure(awsconfig);
 
@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        <GridView></GridView>
+        <GridView />
       </header>
     </div>
   );

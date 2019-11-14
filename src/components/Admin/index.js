@@ -1,58 +1,64 @@
 import React from 'react';
 import './index.css';
-import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
-import { createVodAsset, createVideoObject } from '../../graphql/mutations';
+import {
+  Auth, API, graphqlOperation, Storage,
+} from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
-import awsvideoconfig from '../../aws-video-exports';
 import uuidv4 from 'uuid/v4';
-import FilePicker from './../FilePicker'
+import { createVodAsset, createVideoObject } from '../../graphql/mutations';
+import awsvideoconfig from '../../aws-video-exports';
+import FilePicker from '../FilePicker';
 
 class Admin extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {value: '', titleVal: '',descVal:'',groups:[]};
-        this.submitFormHandler = this.submitFormHandler.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.createAdminPanel = this.createAdminPanel.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '', titleVal: '', descVal: '', groups: [],
+    };
+    this.submitFormHandler = this.submitFormHandler.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.createAdminPanel = this.createAdminPanel.bind(this);
+  }
 
-    componentDidMount(){
-      Auth.currentSession()
-        .then( data =>  {
-          const groups = data.idToken.payload["cognito:groups"];
-          if (groups){
-            this.setState({groups:data.idToken.payload["cognito:groups"]});
-          }
-        });
-
-      Storage.configure({
-        AWSS3: {
-            bucket: awsvideoconfig.awsOutputVideo,
-            region: 'us-west-2'
+  componentDidMount() {
+    Auth.currentSession()
+      .then((data) => {
+        const groups = data.idToken.payload['cognito:groups'];
+        if (groups) {
+          this.setState({ groups: data.idToken.payload['cognito:groups'] });
         }
       });
-    }
 
-    handleChange(event) {
-      const value = event.target.value;
-      const name = event.target.name;
+    Storage.configure({
+      AWSS3: {
+        bucket: awsvideoconfig.awsOutputVideo,
+        region: 'us-west-2',
+      },
+    });
+  }
 
+  handleChange(event) {
+    const { value } = event.target;
+    const { name } = event.target;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
+    myCallback = (dataFromChild) => {
       this.setState({
-        [name]:value
+        file: dataFromChild,
+        fileName: dataFromChild.name,
       });
     }
-    myCallback = (dataFromChild) => {
-        this.setState({
-          file: dataFromChild,
-          fileName: dataFromChild.name
-        });
-    }
+
     handledescChange(event) {
-        this.setState({descVal: event.target.value});
+      this.setState({ descVal: event.target.value });
     }
 
 
-    submitFormHandler(event){
+    submitFormHandler(event) {
       event.preventDefault();
 
       const uuid = uuidv4();
@@ -60,65 +66,70 @@ class Admin extends React.Component {
       const videoObject = {
         input: {
           id: uuid,
-          objectID: uuid
-        }
-      }
+          objectID: uuid,
+        },
+      };
 
       API.graphql(graphqlOperation(createVideoObject, videoObject)).then((response, error) => {
         const videoAsset = {
           input: {
             title: this.state.titleVal,
-            description:this.state.descVal,
+            description: this.state.descVal,
             vodAssetVideoId: uuid,
-          }
-        }
+          },
+        };
         API.graphql(graphqlOperation(createVodAsset, videoAsset)).then((response, error) => {
           console.log(response.data.createVodAsset);
-        }).catch(err => {
-          //alert("error: with form"); 
-          return
+        }).catch((err) => {
+          // alert("error: with form");
+
         });
       });
-      
 
-    Storage.put(`${uuid}.mp4`, this.state.file, {
-        contentType: 'video/*'
+
+      Storage.put(`${uuid}.mp4`, this.state.file, {
+        contentType: 'video/*',
       })
-      .then (result => alert("Successfully Uploaded: " + uuid))
-      .catch(err => console.log("Error: " + err));
-       
-
+        .then((result) => alert(`Successfully Uploaded: ${uuid}`))
+        .catch((err) => console.log(`Error: ${err}`));
     }
 
-    createAdminPanel(){
-     
-      if (this.state.groups.includes("Admin")){
+    createAdminPanel() {
+      if (this.state.groups.includes('Admin')) {
         return (
           <div>
-          <h1>Admin Panel</h1>
-          <form onSubmit={this.submitFormHandler}>
-            <div>
-              Title: <input type="text" value={this.state.titleVal} name="titleVal" onChange={this.handleChange}/><br/>
-              Description: <br/><textarea rows="4" cols="50" value={this.state.descVal} name="descVal" onChange={this.handleChange}></textarea><br/>
-              <FilePicker callbackFromParent={this.myCallback}/>
-              <input type="submit" value="Submit" />
-            </div>
-          </form>
+            <h1>Admin Panel</h1>
+            <form onSubmit={this.submitFormHandler}>
+              <div>
+              Title:
+                {' '}
+                <input type="text" value={this.state.titleVal} name="titleVal" onChange={this.handleChange} />
+                <br />
+              Description:
+                {' '}
+                <br />
+                <textarea rows="4" cols="50" value={this.state.descVal} name="descVal" onChange={this.handleChange} />
+                <br />
+                <FilePicker callbackFromParent={this.myCallback} />
+                <input type="submit" value="Submit" />
+              </div>
+            </form>
           </div>
-          )
-      } else {
-        return (
+        );
+      }
+      return (
         <div>
         Not Authenticated
-        </div>);
-      }
+        </div>
+      );
     }
+
     render() {
-        return (      
-        <div class="App-header">
-         {this.createAdminPanel()}
-      	</div>
-      )
+      return (
+        <div className="App-header">
+          {this.createAdminPanel()}
+        </div>
+      );
     }
 }
 

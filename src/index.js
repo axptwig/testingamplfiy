@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 import App from './components/App';
 import Admin from './components/Admin';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 
 const routing = (
@@ -14,7 +14,7 @@ const routing = (
       <Route path="/Admin" component={Admin} />
     </div>
   </Router>
-)
+);
 
 
 ReactDOM.render(routing, document.getElementById('root'));

@@ -1,33 +1,32 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './index.css';
 
 
-
 class FilePicker extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      name: ""
-    }
+      name: '',
+    };
   }
 
-  async componentDidMount(){
-    //this.uploadFile();
+  async componentDidMount() {
+    // this.uploadFile();
 
   }
 
   onChange(e) {
-      const file = e.target.files[0];
-      this.setState({
-        name:file.name
-      });
-      this.props.callbackFromParent(file);
-      e.preventDefault();    
+    const file = e.target.files[0];
+    this.setState({
+      name: file.name,
+    });
+    this.props.callbackFromParent(file);
+    e.preventDefault();
   }
 
-  render(){
+  render() {
     return (
-      <input type="file" id="FilePicker" accept='video/*' onChange={(e) => this.onChange(e)}/>
+      <input type="file" id="FilePicker" accept="video/*" onChange={(e) => this.onChange(e)} />
     );
   }
 }
