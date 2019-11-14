@@ -91,7 +91,7 @@ class GridView extends Component {
   }
 
   overlayMovie = () => (
-    <Modal id="popup" style={{ maxWidth: 800 }} isOpen={this.state.displayingMovie} toggle={this.hideMovie}>
+    <Modal id="popup" style={{ maxWidth: 755 }} isOpen={this.state.displayingMovie} toggle={this.hideMovie}>
       <ModalHeader toggle={this.hideMovie}>{this.state.choosenItem.title}</ModalHeader>
       <ModalBody>
         {this.state.choosenItem.description}
