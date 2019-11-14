@@ -6,11 +6,9 @@ export const createVodAsset = `mutation CreateVodAsset($input: CreateVodAssetInp
     id
     title
     description
-    length
-    url {
+    video {
       id
-      url
-      subscription
+      objectID
     }
   }
 }
@@ -20,11 +18,9 @@ export const updateVodAsset = `mutation UpdateVodAsset($input: UpdateVodAssetInp
     id
     title
     description
-    length
-    url {
+    video {
       id
-      url
-      subscription
+      objectID
     }
   }
 }
@@ -34,11 +30,9 @@ export const deleteVodAsset = `mutation DeleteVodAsset($input: DeleteVodAssetInp
     id
     title
     description
-    length
-    url {
+    video {
       id
-      url
-      subscription
+      objectID
     }
   }
 }
@@ -46,24 +40,21 @@ export const deleteVodAsset = `mutation DeleteVodAsset($input: DeleteVodAssetInp
 export const createVideoObject = `mutation CreateVideoObject($input: CreateVideoObjectInput!) {
   createVideoObject(input: $input) {
     id
-    url
-    subscription
+    objectID
   }
 }
 `;
 export const updateVideoObject = `mutation UpdateVideoObject($input: UpdateVideoObjectInput!) {
   updateVideoObject(input: $input) {
     id
-    url
-    subscription
+    objectID
   }
 }
 `;
 export const deleteVideoObject = `mutation DeleteVideoObject($input: DeleteVideoObjectInput!) {
   deleteVideoObject(input: $input) {
     id
-    url
-    subscription
+    objectID
   }
 }
 `;

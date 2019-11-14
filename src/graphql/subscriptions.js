@@ -6,11 +6,9 @@ export const onCreateVodAsset = `subscription OnCreateVodAsset {
     id
     title
     description
-    length
-    url {
+    video {
       id
-      url
-      subscription
+      objectID
     }
   }
 }
@@ -20,11 +18,9 @@ export const onUpdateVodAsset = `subscription OnUpdateVodAsset {
     id
     title
     description
-    length
-    url {
+    video {
       id
-      url
-      subscription
+      objectID
     }
   }
 }
@@ -34,11 +30,9 @@ export const onDeleteVodAsset = `subscription OnDeleteVodAsset {
     id
     title
     description
-    length
-    url {
+    video {
       id
-      url
-      subscription
+      objectID
     }
   }
 }
@@ -46,24 +40,21 @@ export const onDeleteVodAsset = `subscription OnDeleteVodAsset {
 export const onCreateVideoObject = `subscription OnCreateVideoObject {
   onCreateVideoObject {
     id
-    url
-    subscription
+    objectID
   }
 }
 `;
 export const onUpdateVideoObject = `subscription OnUpdateVideoObject {
   onUpdateVideoObject {
     id
-    url
-    subscription
+    objectID
   }
 }
 `;
 export const onDeleteVideoObject = `subscription OnDeleteVideoObject {
   onDeleteVideoObject {
     id
-    url
-    subscription
+    objectID
   }
 }
 `;

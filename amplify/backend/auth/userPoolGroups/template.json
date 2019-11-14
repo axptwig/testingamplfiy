@@ -1,21 +1,21 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Parameters": {
-        "authunicornflix70ea44a2UserPoolId": {
+        "authunicornflix4dea6c9fUserPoolId": {
             "Type": "String",
-            "Default": "authunicornflix70ea44a2UserPoolId"
+            "Default": "authunicornflix4dea6c9fUserPoolId"
         },
-        "authunicornflix70ea44a2IdentityPoolId": {
+        "authunicornflix4dea6c9fIdentityPoolId": {
             "Type": "String",
-            "Default": "authunicornflix70ea44a2IdentityPoolId"
+            "Default": "authunicornflix4dea6c9fIdentityPoolId"
         },
-        "authunicornflix70ea44a2AppClientID": {
+        "authunicornflix4dea6c9fAppClientID": {
             "Type": "String",
-            "Default": "authunicornflix70ea44a2AppClientID"
+            "Default": "authunicornflix4dea6c9fAppClientID"
         },
-        "authunicornflix70ea44a2AppClientIDWeb": {
+        "authunicornflix4dea6c9fAppClientIDWeb": {
             "Type": "String",
-            "Default": "authunicornflix70ea44a2AppClientIDWeb"
+            "Default": "authunicornflix4dea6c9fAppClientIDWeb"
         },
         "AuthRoleArn": {
             "Type": "String"
@@ -51,7 +51,7 @@
                 ]
               },
               "UserPoolId" : {
-                "Ref": "authunicornflix70ea44a2UserPoolId"
+                "Ref": "authunicornflix4dea6c9fUserPoolId"
               } 
             }
         },
@@ -63,7 +63,7 @@
                         "",
                         [
                           {
-                            "Ref": "authunicornflix70ea44a2UserPoolId"
+                            "Ref": "authunicornflix4dea6c9fUserPoolId"
                           },
                           "-AdminGroupRole"
                         ]
@@ -84,7 +84,7 @@
                 },
                 "Policies": [
     {
-        "PolicyName": "admin-group-policy",
+        "PolicyName": "unicornflix4dea6c9f-admin-group-policy",
         "PolicyDocument": {
             "Version": "2012-10-17",
             "Statement": [
@@ -95,59 +95,13 @@
                         "s3:PutObject",
                         "s3:DeleteObject"
                     ],
-                    "Resource": "arn:aws:s3:::unicornflixwstest-dev-input/public/*"
+                    "Resource": "arn:aws:s3:::unicornflix-dev-iw6z2qfpy/public/*"
                 }
             ]
         }
     }
 ]
                 
-            }
-        },
-    
-        "UserGroup": {
-          "Type" : "AWS::Cognito::UserPoolGroup",
-          "Properties" : {
-              "GroupName" : "User",
-              "Precedence" : 2,
-              "RoleArn" : {
-                "Fn::GetAtt": [
-                    "UserGroupRole",
-                    "Arn"
-                ]
-              },
-              "UserPoolId" : {
-                "Ref": "authunicornflix70ea44a2UserPoolId"
-              } 
-            }
-        },
-        "UserGroupRole": {
-            "Type": "AWS::IAM::Role",
-            "Properties": {
-                "RoleName":{
-                    "Fn::Join": [
-                        "",
-                        [
-                          {
-                            "Ref": "authunicornflix70ea44a2UserPoolId"
-                          },
-                          "-UserGroupRole"
-                        ]
-                    ]
-                },
-                "AssumeRolePolicyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
-                        {
-                            "Sid": "",
-                            "Effect": "Allow",
-                            "Principal": {
-                                "Federated": "cognito-identity.amazonaws.com"
-                            },
-                            "Action": "sts:AssumeRoleWithWebIdentity"
-                        }
-                    ]
-                }
             }
         },
     
@@ -166,7 +120,7 @@
                                 "",
                                 [
                                   
-                                  "unicornflix70ea44a2",
+                                  "unicornflix4dea6c9f",
                                   "-ExecutionRole-",
                                   {
                                     "Ref": "env"
@@ -325,16 +279,16 @@
                     "Ref": "UnauthRoleArn"
                 },
                 "identityPoolId": {
-                    "Ref": "authunicornflix70ea44a2IdentityPoolId"
+                    "Ref": "authunicornflix4dea6c9fIdentityPoolId"
                 },
                 "userPoolId": {
-                    "Ref": "authunicornflix70ea44a2UserPoolId"
+                    "Ref": "authunicornflix4dea6c9fUserPoolId"
                 },
                 "appClientIDWeb": {
-                    "Ref": "authunicornflix70ea44a2AppClientIDWeb"
+                    "Ref": "authunicornflix4dea6c9fAppClientIDWeb"
                 },
                 "appClientID": {
-                    "Ref": "authunicornflix70ea44a2AppClientID"
+                    "Ref": "authunicornflix4dea6c9fAppClientID"
                 },
                 "region": {
                     "Ref": "AWS::Region"
@@ -352,17 +306,6 @@
             "Value": {
                 "Fn::GetAtt": [
                     "AdminGroupRole",
-                    "Arn"
-                ]
-            }
-         
-        },
-        
-      
-        "UserGroupRole": {
-            "Value": {
-                "Fn::GetAtt": [
-                    "UserGroupRole",
                     "Arn"
                 ]
             }

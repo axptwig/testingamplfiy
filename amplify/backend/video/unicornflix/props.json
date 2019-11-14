@@ -1,0 +1,27 @@
+{
+    "shared": {
+        "resourceName": "unicornflix",
+        "bucketInput": "unicornflix-dev-iw6z2qfpy",
+        "bucketOutput": "unicornflix-dev-ow6z2qfpy",
+        "bucket": "amplify-unicornflix-dev-163618-deployment"
+    },
+    "template": {
+        "name": "Amplify_Video_Ott_Hls_Ts_Avc_Aac.json",
+        "arn": "arn:aws:mediaconvert:us-west-2:342464646979:jobTemplates/Amplify_Video_Ott_Hls_Ts_Avc_Aac"
+    },
+    "contentDeliveryNetwork": {
+        "enableDistribution": false
+    },
+    "cms": {
+        "subscribeField": false,
+        "editAPI": true
+    },
+    "parameters": {
+        "authRoleName": {
+            "Ref": "AuthRoleName"
+        },
+        "unauthRoleName": {
+            "Ref": "UnauthRoleName"
+        }
+    }
+}

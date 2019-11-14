@@ -6,11 +6,9 @@ export const getVodAsset = `query GetVodAsset($id: ID!) {
     id
     title
     description
-    length
-    url {
+    video {
       id
-      url
-      subscription
+      objectID
     }
   }
 }
@@ -25,11 +23,9 @@ export const listVodAssets = `query ListVodAssets(
       id
       title
       description
-      length
-      url {
+      video {
         id
-        url
-        subscription
+        objectID
       }
     }
     nextToken
@@ -39,8 +35,7 @@ export const listVodAssets = `query ListVodAssets(
 export const getVideoObject = `query GetVideoObject($id: ID!) {
   getVideoObject(id: $id) {
     id
-    url
-    subscription
+    objectID
   }
 }
 `;
@@ -52,35 +47,7 @@ export const listVideoObjects = `query ListVideoObjects(
   listVideoObjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      url
-      subscription
-    }
-    nextToken
-  }
-}
-`;
-export const searchVodAssets = `query SearchVodAssets(
-  $filter: SearchablevodAssetFilterInput
-  $sort: SearchablevodAssetSortInput
-  $limit: Int
-  $nextToken: String
-) {
-  searchVodAssets(
-    filter: $filter
-    sort: $sort
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      title
-      description
-      length
-      url {
-        id
-        url
-        subscription
-      }
+      objectID
     }
     nextToken
   }

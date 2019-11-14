@@ -2,11 +2,10 @@
     {
         "groupName": "Admin",
         "precedence": 1,
-        "customPolicies": [ 
-            { 
-                "PolicyName": "admin-group-policy",
-                "PolicyDocument":
-                {
+        "customPolicies": [
+            {
+                "PolicyName": "unicornflix4dea6c9f-admin-group-policy",
+                "PolicyDocument": {
                     "Version": "2012-10-17",
                     "Statement": [
                         {
@@ -16,15 +15,11 @@
                                 "s3:PutObject",
                                 "s3:DeleteObject"
                             ],
-                            "Resource": "arn:aws:s3:::unicornflixwstest-dev-input/public/*"
+                            "Resource": "arn:aws:s3:::unicornflix-dev-iw6z2qfpy/public/*"
                         }
                     ]
                 }
             }
         ]
-    },
-    {
-        "groupName": "User",
-        "precedence": 2
     }
 ]

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
+import { Storage } from 'aws-amplify';
 import {Grid, Col, Row} from 'react-styled-flexboxgrid';
 import {Modal, ModalBody, ModalHeader} from 'reactstrap';
 import { onCreateVodAsset } from '../../graphql/subscriptions';
@@ -35,6 +36,26 @@ class GridView extends Component {
     event.preventDefault();
   }
   async componentDidMount(){
+    Storage.configure({
+      AWSS3: {
+          bucket: 'unicornflixwstest-dev-output',
+          region: 'us-west-2'
+      }
+    });
+    const storageOptions = {
+      customPrefix: {
+        public: 'output/'
+      }
+    };
+    const url = await Storage.get('SampleVideo_1280x720_1mb.m3u8', storageOptions);
+    this.setState({
+      sources:[
+        {
+          src:url,
+          type:'application/x-mpegURL'
+        }
+      ]
+    });
     const allTodos = await API.graphql(graphqlOperation(queries.listVodAssets));
     var nextToken = allTodos.data.listVodAssets.nextToken;
     if(nextToken == undefined){
@@ -71,7 +92,7 @@ class GridView extends Component {
     console.log("clicked");
     this.setState({
       sources:[ {
-        src:link,
+        src:'https://unicornflixwstest-dev-output.s3-us-west-2.amazonaws.com/output/2018-11-28+16-49-02.m3u8',
         type:'application/x-mpegURL'
       }]
     }, () => {
