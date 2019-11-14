@@ -9,6 +9,8 @@ import VideoPlayer from './../VideoPlayer'
 import GridCardView from './../GridCardView'
 import * as queries from '../../graphql/queries';
 import BottomScrollListener from 'react-bottom-scroll-listener'
+import { AwesomeButton } from "react-awesome-button";
+import "react-awesome-button/dist/styles.css";
 import 'video.js/dist/video-js.css'
 
 class GridView extends Component {
@@ -105,18 +107,13 @@ class GridView extends Component {
     return (
     <Modal id='popup' style={{maxWidth: 800}} isOpen={this.state.displayingMovie} toggle={this.hideMovie}>
       <ModalHeader  toggle={this.hideMovie}>{this.state.choosenItem.title}</ModalHeader>
+      <AwesomeButton type="primary">Button</AwesomeButton>
       <ModalBody>
+        {this.state.choosenItem.description}
         {this.state.choosenItem.details}
-            <div>
                 <VideoPlayer controls={true} sources={this.state.sources} width={720} height={420} bigPlayButton={false} autoplay={true}
              
                 />
-                
-            </div>
-            <div>
-              Input Url Here: <input type="text" value={this.state.value} name="contentURL" onChange={this.handleChange}></input>
-              <button onClick={e => this.handleSubmit(e)}>submit</button>
-            </div>
       </ModalBody>
     </Modal>
     );
@@ -141,7 +138,7 @@ class GridView extends Component {
 
   render(){
     const items = this.state.items.map((item, key) =>
-      <Col xs={6} sm={3} lg={2} style={{paddingTop:15, paddingBottom:15}}>
+      <Col xs={6} sm={4} lg={3.5} style={{paddingTop:15, paddingBottom:15}}>
         <button onClick={(e) => this.displayMovie(item, e)}><GridCardView item={item}></GridCardView></button>
       </Col>
     );
