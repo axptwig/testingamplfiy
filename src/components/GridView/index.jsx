@@ -91,7 +91,7 @@ class GridView extends Component {
   }
 
   overlayMovie = () => (
-    <Modal id="popup" style={{ maxWidth: 755 }} isOpen={this.state.displayingMovie} toggle={this.hideMovie}>
+    <Modal id="popup" style={{ maxWidth: 800 }} isOpen={this.state.displayingMovie} toggle={this.hideMovie}>
       <ModalHeader toggle={this.hideMovie}>{this.state.choosenItem.title}</ModalHeader>
       <ModalBody>
         {this.state.choosenItem.description}
@@ -126,12 +126,12 @@ class GridView extends Component {
 
 
   render() {
+    const a = 0;
     const items = this.state.items.map((item, key) => (
       <Col xs={6} sm={4} lg={3.5} style={{ paddingTop: 15, paddingBottom: 15 }}>
         <button onClick={(e) => this.displayMovie(item, e)}><GridCardView item={item} /></button>
       </Col>
     ));
-    const a = 0;
 
     // https://github.com/LoicMahieu/react-styled-flexboxgrid
 
