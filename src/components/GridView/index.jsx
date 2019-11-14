@@ -131,6 +131,7 @@ class GridView extends Component {
         <button onClick={(e) => this.displayMovie(item, e)}><GridCardView item={item} /></button>
       </Col>
     ));
+    const a = 0;
 
     // https://github.com/LoicMahieu/react-styled-flexboxgrid
 
